@@ -104,3 +104,53 @@ const showCountry = async(countryName) => {
         renderError(error.message)
     }
 }
+
+//---------------API-CODE------------
+
+const getCountryDataByCode = async countryCode => {
+
+    try {
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
+        if (!response.ok) throw new Error(`Something is wrong!  ${response.status}`);
+        const data = await response.json();
+        //const [countryData] = data;
+        return data[0];
+
+    } catch (error) {
+        console.log(error.message)
+        renderError(error.message)
+
+    } finally {
+        console.log("teknik bir sorun oluştu tekrar deneyin");
+    }
+
+}
+const renderError = (message) => {
+    const countryElm = document.querySelector('.countries');
+    countryElm.insertAdjacentText('beforeend', message);
+    countryElm.style.opacity = 1;
+};
+
+
+
+const showCountryWithNeighboars = async(countryName) => {
+    try {
+        const countryData = await getCountryDataByName(countryName);
+
+        renderCountry(countryData);
+        const neighboars = countryData.borders;
+        if (!neighboars) {
+            throw new Error('No neighbours 🤷‍♀️');
+
+        }
+        neighboars.forEach(async neighbour => {
+            const neighbourData = await getCountryDataByCode(neighbour);
+            renderCountry(neighbourData, "neighbour");
+
+        });
+
+    } catch (error) {
+        renderError(error.message);
+    }
+
+}
