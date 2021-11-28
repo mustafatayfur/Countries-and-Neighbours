@@ -53,3 +53,59 @@ body {
     display: block;
     justify-content: center;
 }
+
+/* fetch example */
+
+.container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.countries {
+    /* margin-bottom: 8rem; */
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    opacity: 0;
+    transition: opacity 1.4s;
+}
+
+.country {
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.2);
+    font-size: 1.8rem;
+    width: 70rem;
+    border-radius: 0.7rem;
+    margin: 3 0rem;
+    margin-bottom: 2rem;
+    /* overflow: hidden; */
+}
+
+.neighbour::before {
+    content: 'Neighbour country';
+    width: 100%;
+    position: absolute;
+    top: -4rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(255, 230, 4);
+}
+
+.neighbour {
+    transform: scale(0.8) translateY(1rem);
+    margin-left: 0;
+}
+
+.country__img {
+    float: left;
+    flex: 50%;
+    width: 20rem;
+    /* height: 18rem; */
+    object-fit: cover;
+    background-color: #eee;
+    border-top-left-radius: 0.7rem;
+    border-bottom-left-radius: 0.7rem;
+}
